@@ -35,7 +35,7 @@ body {
     padding-top: 1%;
     font-size: 35px;
     font-weight: bold;
-    color: #C2B280;
+    color: white;
 }
 
 #welcometext2 {
@@ -43,7 +43,7 @@ body {
     justify-content: center;
     font-size: 20px;
     font-weight: bold;
-    color: #C2B280;
+    color: white;
 }
 
 #logintext {
@@ -52,30 +52,47 @@ body {
     padding-top: 1%;
     font-size: 28px;
     font-weight: bold;
-    color: #C2B280;
-}
-
-form input[type="text"] { 
-
-}
-
-form input[type="password"]  {
-
-}
-
-form label {
-
-}
-
-form button[type="submit"] {
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
     color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
+}
+
+input[type="text"], input[type="password"] {
+    /* Styles for the username and password boxes */
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 30% !important;
+    color: black;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+button[type="submit"] {
+    /* Styles for the submit button */
+    width: 5%;
+    height: 50%;
+    background-color: rgba(60, 179, 113, 0.7);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-top: 20px;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
     cursor: pointer;
-    transition-duration: 0.4s;
+}
+
+button[type="submit"]:hover {
+    /* Styles for the submit button when hovered */
+    opacity: 0.8;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 form .form-container {
