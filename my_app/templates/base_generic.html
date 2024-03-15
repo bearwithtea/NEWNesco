@@ -1,14 +1,16 @@
 <!-- my_app/templates/base_generic.html -->
 
-{% load static %}
+{% load static %}  <!-- Load Django's static files -->
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'NEWNesco/my_app/static/my_app/style.css' %}"> 
 </head>
 <body>
-    <!-- Rest of your HTML goes here -->
+
+    {% block content %}{% endblock %}
+
 </body>
 </html>

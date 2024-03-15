@@ -15,3 +15,6 @@ def login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
+
+def map_view(request):
+    return render(request, 'map.html')
