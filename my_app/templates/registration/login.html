@@ -2,19 +2,30 @@
 
 {% load static %}
 
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block head %}
+  <title>Login</title>
   <link rel="stylesheet" type="text/css" href="{% static 'my_app/login.css' %}">
-  <title>Document</title>
-</head>
-  <h2>Login</h2>
+{% endblock %}
+
+{% block content %}
+  <div id="video-background">
+      <video playsinline autoplay muted loop>
+          <source src="{% static 'my_app/Webm to MP4 conversion.mp4' %}" type="video/mp4">
+      </video>
+  </div>
+  <div id = "welcometext">
+  <h1>Welcome to NEWNesco</h1>
+  </div>
+  <div id = "welcometext2">
+  <h2> A better, simpler way to learn about UNESCO sites</h2>
+  </div>
+  <div id = "logintext">
+    <h2>Login</h2>
+  </div>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
     <button type="submit">Login</button>
   </form>
 {% endblock %}
