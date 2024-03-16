@@ -8,7 +8,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var marker1 = L.marker([37.262,-108.4855556]).addTo(map);
 marker1.bindPopup("<b>Mesa Verde National Park</b>").openPopup();
 marker1.on('click', function() {
-    document.getElementById('info').innerHTML = '<img src = "static/my_app/MVphoto.jpg">' + 'Additional information about Mesa Verde National Park';
+    document.getElementById('info').innerHTML = 'Located in the bottom right of Colorado, Mesa Verde National Park is a U.S. National Park and UNESCO World Heritage Site. The park protects some of the best-preserved Ancestral Puebloan archaeological sites in the United States. The park was created by President Theodore Roosevelt in 1906. It occupies 52,485 acres near the Four Corners region of the American Southwest. With more than 5,000 sites, including 600 cliff dwellings, it is the largest archaeological preserve in the U.S. The park is located in Montezuma County, Colorado, near the town of Cortez, in the Southwestern part of the state, about 40 miles west of Durango. The park features numerous ruins of homes and villages built by the Ancestral Puebloans. The Ancestral Puebloans made stone villages their home in the 1200s. The park is filled with canyons, mesas, and mountains, and is located at the edge of the San Juan National Forest. The park is named for the Spanish word for "green table," referring to the mesas that make up the park';
 });
 
 var marker2 = L.marker([44.46056, -110.82778]).addTo(map);

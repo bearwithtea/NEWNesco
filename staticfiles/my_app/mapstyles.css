@@ -21,8 +21,9 @@ body {
 
 #info {
     position: absolute;
-    left: 75%;
-    top: 10%;
-    width: 200px; /* adjust as needed */
+    font-size: 25px;
+    left: 60%;
+    top: 9%;
+    width: 500px; /* adjust as needed */
     height: 50%; /* adjust as needed */
 }

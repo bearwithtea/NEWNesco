@@ -84,7 +84,6 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    /* Styles for the submit button when hovered */
     opacity: 0.8;
 }
 
@@ -103,6 +102,5 @@ form .form-container {
 }
 
 form input[type="text"], form input[type="password"] {
-    width: 90%; /* Adjust as needed */
-    /* Other styles... */
+    width: 90%;
 }
