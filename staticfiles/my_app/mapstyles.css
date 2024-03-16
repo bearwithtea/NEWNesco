@@ -18,3 +18,11 @@ body {
     width: 900px; 
     height: 800px; 
 }
+
+#info {
+    position: absolute;
+    left: 75%;
+    top: 10%;
+    width: 200px; /* adjust as needed */
+    height: 50%; /* adjust as needed */
+}
