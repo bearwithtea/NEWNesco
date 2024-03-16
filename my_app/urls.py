@@ -8,5 +8,5 @@ from .views import map_view
 urlpatterns = [
     path('', views.home, name='home'),
     path('map/', map_view, name='map'),
-    path('login/', views.login, name='login'),
+    path('login/', views.login_view, name='login'),
 ]
