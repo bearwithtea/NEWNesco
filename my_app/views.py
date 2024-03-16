@@ -10,16 +10,16 @@ def home(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
             auth_login(request, user)
-            return HttpResponse("Logged in successfully")
+            return redirect('map')
         else:
-            return HttpResponse("Invalid username or password")
+            return HttpResponse("Invalid username or password :(. Please give it another show.")
     else:
-        return render(request, 'registration/login.html')
+        form = AuthenticationForm()
+        return render(request, 'registration/login.html', {'form': form})
     
 def map_view(request):
     return render(request, 'map.html')
