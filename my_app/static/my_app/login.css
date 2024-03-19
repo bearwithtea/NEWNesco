@@ -56,7 +56,6 @@ body {
 }
 
 input[type="text"], input[type="password"] {
-    /* Styles for the username and password boxes */
     background-color: rgba(255, 255, 255, 0.7);
     width: 30% !important;
     color: black;
@@ -69,7 +68,6 @@ input[type="text"], input[type="password"] {
 }
 
 button[type="submit"] {
-    /* Styles for the submit button */
     width: 5%;
     height: 50%;
     background-color: rgba(60, 179, 113, 0.7);
