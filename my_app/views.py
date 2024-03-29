@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from .models import Site, Rating
 from django import forms
+from django.db.models import Avg
 
 def home(request):
     return render(request, 'home.html')
@@ -61,6 +62,19 @@ def submit_rating(request):
     else:
         form = RatingForm()
         return render(request, 'my_app/submit_rating.html', {'form': form})
+    
+def get_ratings(request, site_id):
+    site = Site.objects.get(id=site_id)
+    ratings = list(site.rating_set.values())
+    average_rating = site.rating_set.aggregate(Avg('value'))['value__avg']
+    return JsonResponse({'ratings': ratings, 'average_rating': average_rating})
+
+from django.db.models import Avg
+
+def get_average_rating(request, site_id):
+    site = Site.objects.get(id=site_id)
+    average_rating = Rating.objects.filter(site=site).aggregate(Avg('value'))['value__avg']
+    return JsonResponse({'average_rating': average_rating})
 
 class RatingForm(forms.Form): 
     site_id = forms.IntegerField(widget=forms.HiddenInput())

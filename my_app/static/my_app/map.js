@@ -10,19 +10,24 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var marker1 = L.marker([37.262,-108.4855556]).addTo(map);
 marker1.bindPopup("<b>Mesa Verde National Park</b>").openPopup();
 marker1.on('click', function() {
-    document.getElementById('info').innerHTML = 'Located in the bottom right of Colorado, Mesa Verde National Park is a U.S. National Park and UNESCO World Heritage Site. The park protects some of the best-preserved Ancestral Puebloan archaeological sites in the United States. The park was created by President Theodore Roosevelt in 1906. It occupies 52,485 acres near the Four Corners region of the American Southwest. With more than 5,000 sites, including 600 cliff dwellings, it is the largest archaeological preserve in the U.S. The park is located in Montezuma County, Colorado, near the town of Cortez, in the Southwestern part of the state, about 40 miles west of Durango. The park features numerous ruins of homes and villages built by the Ancestral Puebloans. The Ancestral Puebloans made stone villages their home in the 1200s. The park is filled with canyons, mesas, and mountains, and is located at the edge of the San Juan National Forest. The park is named for the Spanish word for "green table," referring to the mesas that make up the park';
+    document.getElementById('info').innerHTML = 'Information about Mesa Verde National Park';
 });
 
 var marker2 = L.marker([44.46056, -110.82778]).addTo(map);
+marker2.id = 2;  // Add the ID property to the marker
 marker2.bindPopup("<b>Yellowstone National Park</b>").openPopup();
 marker2.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Yellowstone National Park';
+    fetch('/get_average_rating/' + this.id + '/')  // Use the ID property in the fetch URL
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('info').innerHTML = 'Average rating for Yellowstone National Park: ' + data.average_rating;
+        });
 });
 
 var marker3 = L.marker([36.10083333, -112.0905556]).addTo(map);
 marker3.bindPopup("<b>Grand Canyon National Park</b>").openPopup();
 marker3.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Grand Canyon National Park';
+    document.getElementById('info').innerHTML = 'Information about Grand Canyon National Park';
 });
 
 var marker4 = L.marker([25.55444444, -80.99638889]).addTo(map);
@@ -88,5 +93,24 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+});
+
+document.querySelectorAll('.site').forEach(function(site) {
+    site.addEventListener('click', function() {
+        var siteId = this.dataset.siteId;
+        fetch('/get_ratings/' + siteId + '/')
+            .then(response => response.json())
+            .then(data => {
+                var ratingsElement = document.getElementById('ratings');
+                ratingsElement.innerHTML = '';
+                data.ratings.forEach(function(rating) {
+                    var ratingElement = document.createElement('p');
+                    ratingElement.textContent = 'Rating: ' + rating.value;
+                    ratingsElement.appendChild(ratingElement);
+                });
+                var averageRatingElement = document.getElementById('average_rating');
+                averageRatingElement.textContent = 'Average rating: ' + data.average_rating;
+            });
     });
 });
