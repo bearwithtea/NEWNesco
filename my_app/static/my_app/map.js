@@ -64,3 +64,20 @@ marker10.bindPopup("<b>Monticello and the University of Virginia in Charlottesvi
 marker10.on('click', function() {
     document.getElementById('info').innerHTML = 'Additional information about Monticello and the University of Virginia in Charlottesville';
 });
+
+var stars = document.querySelectorAll('.star');
+stars.forEach(function(star) {
+    star.addEventListener('click', function() {
+        var rating = this.getAttribute('data-rating');
+        fetch('/rate_site', {
+            method: 'POST',
+            body: JSON.stringify({
+                site_id: 1,
+                rating: rating
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    });
+});
