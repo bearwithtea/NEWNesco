@@ -1,7 +1,6 @@
 body {
     font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
-
 #headertext {
     display: flex;
     justify-content: center;
@@ -26,4 +25,45 @@ body {
     top: 9%;
     width: 500px; /* adjust as needed */
     height: 50%; /* adjust as needed */
+}
+
+.submitRating {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#yourrating {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#yourrating h2 {
+    color: #343a40;
+    font-size: 24px;
+}
+
+#yourrating p {
+    color: #6c757d;
+    font-size: 18px;
+}
+
+#yourrating form {
+    margin-top: 10px;
+}
+
+#yourrating input[type="number"] {
+    width: 50px;
+    height: 30px;
+    margin-right: 10px;
 }

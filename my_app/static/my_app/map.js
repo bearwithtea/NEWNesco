@@ -5,6 +5,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+// FIXME: Add the rest of the sites.
+
 var marker1 = L.marker([37.262,-108.4855556]).addTo(map);
 marker1.bindPopup("<b>Mesa Verde National Park</b>").openPopup();
 marker1.on('click', function() {
@@ -65,18 +67,25 @@ marker10.on('click', function() {
     document.getElementById('info').innerHTML = 'Additional information about Monticello and the University of Virginia in Charlottesville';
 });
 
-var stars = document.querySelectorAll('.star');
-stars.forEach(function(star) {
-    star.addEventListener('click', function() {
-        var rating = this.getAttribute('data-rating');
-        fetch('/rate_site', {
-            method: 'POST',
-            body: JSON.stringify({
-                site_id: 1,
-                rating: rating
-            }),
-            headers: {
-                'Content-Type': 'application/json'
+$(document).ready(function() {
+    $(".submitRating").click(function(e) {
+        e.preventDefault();
+        var formId = $(this).parent().attr('id');
+        var rating = $("#" + formId + " input[name='rating']").val();
+        var siteId = $("#" + formId + " input[name='site_id']").val();
+        $.ajax({
+            url: '/rate_site/',  // replace with your actual rate_site URL
+            type: "POST",
+            data: {
+                'site_id': siteId,
+                'rating': rating,
+                'csrfmiddlewaretoken': $.cookie('csrftoken')  // get CSRF token from cookie
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    alert("Rating submitted successfully.");
+                }
             }
         });
     });

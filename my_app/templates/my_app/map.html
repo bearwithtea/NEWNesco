@@ -29,27 +29,25 @@
   </section>
   <section id = "extrainfo">
     <div id="info">
-      
+
     </div>
   </section>
   <section id = "yourrating">
-    <div class="yourstars">
-      <span class="star" data-rating="1">&#9734;</span>
-      <span class="star" data-rating="2">&#9734;</span>
-      <span class="star" data-rating="3">&#9734;</span>
-      <span class="star" data-rating="4">&#9734;</span>
-      <span class="star" data-rating="5">&#9734;</span>
-  </div>
+    {% for site in sites %}
+    <div>
+      <h2>{{ site.name }}</h2>
+      <p>Average rating: {{ site.average_rating }}</p>
+      <form id="ratingForm{{ site.id }}" action="{% url 'submit_rating' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="site_id" value="{{ site.id }}">
+          <input type="number" name="rating" min="1" max="5">
+          <input type="submit" class="submitRating" value="Rate">
+      </form>
+    </div>
   </section>
-  <section id = "avgrating">
-    <div class="avgstars">
-      <span class="star" data-rating="1">&#9734;</span>
-      <span class="star" data-rating="2">&#9734;</span>
-      <span class="star" data-rating="3">&#9734;</span>
-      <span class="star" data-rating="4">&#9734;</span>
-      <span class="star" data-rating="5">&#9734;</span>
-  </section>
-  <script src="{% static 'my_app/map.js' %}"></script>
+    {% endfor %}
+    <script src="{% static 'my_app/map.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </body>
 </html>
 {%endblock%}
