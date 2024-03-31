@@ -4,13 +4,12 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponse
-from .models import Site  # import the Site model
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import redirect
 from .models import Site, Rating
 from django import forms
 from django.db.models import Avg
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 def home(request):
     return render(request, 'home.html')
@@ -72,9 +71,18 @@ def get_ratings(request, site_id):
 from django.db.models import Avg
 
 def get_average_rating(request, site_id):
-    site = Site.objects.get(id=site_id)
+    site = get_object_or_404(Site, id=site_id)
     average_rating = Rating.objects.filter(site=site).aggregate(Avg('value'))['value__avg']
     return JsonResponse({'average_rating': average_rating})
+
+def get_site_data(request, site_id):
+    site = get_object_or_404(Site, id=site_id)
+    data = {
+        'id': site.id,
+        'name': site.name,
+        'average_rating': site.average_rating,  # Make sure this attribute exists
+    }
+    return JsonResponse(data)
 
 class RatingForm(forms.Form): 
     site_id = forms.IntegerField(widget=forms.HiddenInput())
@@ -87,3 +95,4 @@ from .models import Site
 def get_all_site_ids(request):
     site_ids = list(Site.objects.values_list('id', flat=True))
     return JsonResponse({'site_ids': site_ids})
+

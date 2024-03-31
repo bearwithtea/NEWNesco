@@ -14,5 +14,6 @@ urlpatterns = [
     path('submit_rating/', views.submit_rating, name='submit_rating'),
     path('get_ratings/<int:site_id>/', views.get_ratings, name='get_ratings'),
     path('get_average_rating/<int:site_id>/', views.get_average_rating),
+    path('get_site_data/<int:site_id>/', views.get_site_data),
     path('site-ids/', get_all_site_ids, name='get_all_site_ids'),
 ]

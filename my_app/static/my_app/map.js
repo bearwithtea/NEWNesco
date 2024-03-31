@@ -6,25 +6,38 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var sites = [
-    {id: 1, name: 'Mesa Verde National Park', coords: [37.262,-108.4855556]},
-    {id: 2, name: 'Yellowstone National Park', coords: [44.46056, -110.82778]},
+    {id: 42, name: 'Mesa Verde National Park', coords: [37.262,-108.4855556]},
+    {id: 43, name: 'Yellowstone National Park', coords: [44.46056, -110.82778]},
     //FIXME: Add the rest of the sites.
 ];
 
 sites.forEach(function(site) {
-    var marker = L.marker(site.coords).addTo(map);
+    let marker = L.marker(site.coords).addTo(map);
     marker.id = site.id;
-    marker.bindPopup("<b>" + site.name + "</b>").openPopup();
     marker.on('click', function() {
-        fetch('/get_average_rating/' + this.id + '/')
-            .then(response => response.json())
-            .then(data => {
-                // Display the site name and average rating in the popup
-                this.bindPopup("<b>" + site.name + "</b><br>Average rating: " + data.average_rating).openPopup();
-    
-                // Display the site info in the 'info' element
-                document.getElementById('info').innerHTML = 'Information about ' + site.name + ': ' + data.info;
-            });
+        $.ajax({
+            url: '/get_site_data/' + this.id + '/',
+            dataType: 'json',
+            success: function(data) {
+                // Create the popup content
+                var popupContent = '<h2>' + data.name + '</h2>' +
+                                   '<p>Average rating: ' + data.average_rating + '</p>';
+
+                // Bind the popup to the marker
+                marker.bindPopup(popupContent).openPopup();
+
+                // Update the HTML with the site data
+                document.getElementById('siteName').textContent = data.name;
+                document.getElementById('averageRating').textContent = 'Average rating: ' + data.average_rating;
+
+                // Update the form action and site_id value
+                document.getElementById('ratingForm').action = '/submit_rating/' + this.id + '/';
+                document.getElementById('siteId').value = this.id;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+            }
+        });
     });
 });
 
