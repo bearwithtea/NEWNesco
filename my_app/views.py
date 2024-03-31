@@ -1,22 +1,21 @@
-# my_app/views.py
-
-from django.shortcuts import redirect, render
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login as auth_login
-from django.http import HttpResponse
+# Django imports
+from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Site, Rating
 from django import forms
 from django.db.models import Avg
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+
+# Local imports
+from .models import Site, Rating
 
 def home(request):
     return render(request, 'home.html')
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = authenticate(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
@@ -24,7 +23,7 @@ def login_view(request):
         else:
             return HttpResponse("Invalid username or password :(. Please give it another shot.")
     else:
-        form = AuthenticationForm()
+        form = authenticate()
         return render(request, 'registration/login.html', {'form': form})
     
 def map_view(request):
@@ -95,4 +94,3 @@ from .models import Site
 def get_all_site_ids(request):
     site_ids = list(Site.objects.values_list('id', flat=True))
     return JsonResponse({'site_ids': site_ids})
-

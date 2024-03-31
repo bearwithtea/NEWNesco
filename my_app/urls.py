@@ -1,9 +1,8 @@
-# my_app/urls.py
 
-from django.urls import path
-from django.contrib.auth import views as auth_views
-from . import views
-from .views import map_view
+from django.urls import path 
+from django.contrib.auth import views as auth_views 
+from . import views 
+from .views import map_view 
 from .views import get_all_site_ids
 
 urlpatterns = [

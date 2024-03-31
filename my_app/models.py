@@ -1,3 +1,4 @@
+#Django Imports
 from django.db import models
 
 class Site(models.Model):
@@ -10,12 +11,13 @@ class Site(models.Model):
             return sum(rating.value for rating in ratings) / ratings.count()
         else:
             return 0
-        
+
     def update_average_rating(self):
         ratings = self.rating_set.all()
         total = sum(rating.value for rating in ratings)
         self.average_rating = total / len(ratings)
         self.save()
+
 class Rating(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     value = models.IntegerField()
