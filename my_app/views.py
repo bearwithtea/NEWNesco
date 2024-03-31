@@ -23,7 +23,7 @@ def login_view(request):
             auth_login(request, user)
             return redirect('map')
         else:
-            return HttpResponse("Invalid username or password :(. Please give it another show.")
+            return HttpResponse("Invalid username or password :(. Please give it another shot.")
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
@@ -80,3 +80,10 @@ class RatingForm(forms.Form):
     site_id = forms.IntegerField(widget=forms.HiddenInput())
     rating = forms.IntegerField(min_value=1, max_value=5)
     # FIXME: throw an error when a user enters nothing
+
+from django.http import JsonResponse
+from .models import Site
+
+def get_all_site_ids(request):
+    site_ids = list(Site.objects.values_list('id', flat=True))
+    return JsonResponse({'site_ids': site_ids})
