@@ -15,13 +15,14 @@ sites.forEach(function(site) {
     let marker = L.marker(site.coords).addTo(map);
     marker.id = site.id;
     marker.on('click', function() {
+        let markerId = this.id;  // Store the id of the marker
         $.ajax({
-            url: '/get_site_data/' + this.id + '/',
+            url: '/get_site_data/' + markerId + '/',
             dataType: 'json',
             success: function(data) {
                 // Create the popup content
                 var popupContent = '<h2>' + data.name + '</h2>' +
-                                   '<p>Average rating: ' + data.average_rating + '</p>';
+                                   '<p>Average rating: ' + data.average_rating.toFixed(2) + '</p>';
 
                 // Bind the popup to the marker
                 marker.bindPopup(popupContent).openPopup();
@@ -31,8 +32,8 @@ sites.forEach(function(site) {
                 document.getElementById('averageRating').textContent = 'Average rating: ' + data.average_rating;
 
                 // Update the form action and site_id value
-                document.getElementById('ratingForm').action = '/submit_rating/' + this.id + '/';
-                document.getElementById('siteId').value = this.id;
+                document.getElementById('ratingForm').action = '/submit_rating/' + markerId + '/';  // Use the stored markerId
+                document.getElementById('siteId').value = markerId;  // Use the stored markerId
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);

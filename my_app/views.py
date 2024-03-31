@@ -45,7 +45,7 @@ def rate_site(request):
     else:
         return JsonResponse({'success': False})
     
-def submit_rating(request):
+def submit_rating(request, site_id):
     if request.method == 'POST':
         form = RatingForm(request.POST)
         if form.is_valid():

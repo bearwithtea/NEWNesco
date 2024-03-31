@@ -3,7 +3,8 @@ body {
 }
 #headertext {
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    padding-left: 46px;
     padding-top: 1%;
     font-size: 35px;
     font-weight: bold;
@@ -15,7 +16,7 @@ body {
     top: 100px;
     left: 50px; 
     width: 900px; 
-    height: 800px; 
+    height: 750px; 
 }
 
 #info {
@@ -44,8 +45,10 @@ body {
     bottom: 0;
     width: 100%;
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: 40px;
 }
 
 #yourrating h2 {
@@ -59,7 +62,7 @@ body {
 }
 
 #yourrating form {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 #yourrating input[type="number"] {
