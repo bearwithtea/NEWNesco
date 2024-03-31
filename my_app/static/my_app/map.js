@@ -1,5 +1,3 @@
-// FIXME: Add the rest of the sites.
-
 var map = L.map('map').setView([41.2565, -95.9345], 4);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,22 +5,24 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// Array of site data
 var sites = [
     {id: 1, name: 'Mesa Verde National Park', coords: [37.262,-108.4855556]},
     {id: 2, name: 'Yellowstone National Park', coords: [44.46056, -110.82778]},
-    // Add more sites as necessary
+    //FIXME: Add the rest of the sites.
 ];
 
-// Loop over the sites array to create the markers
 sites.forEach(function(site) {
     var marker = L.marker(site.coords).addTo(map);
     marker.id = site.id;
     marker.bindPopup("<b>" + site.name + "</b>").openPopup();
     marker.on('click', function() {
-        fetch('/get_site_info/' + this.id + '/')
+        fetch('/get_average_rating/' + this.id + '/')
             .then(response => response.json())
             .then(data => {
+                // Display the site name and average rating in the popup
+                this.bindPopup("<b>" + site.name + "</b><br>Average rating: " + data.average_rating).openPopup();
+    
+                // Display the site info in the 'info' element
                 document.getElementById('info').innerHTML = 'Information about ' + site.name + ': ' + data.info;
             });
     });
@@ -55,6 +55,9 @@ $(document).ready(function() {
 document.querySelectorAll('.site').forEach(function(site) {
     site.addEventListener('click', function() {
         var siteId = this.dataset.siteId;
+        var siteName = sites.find(s => s.id === parseInt(siteId)).name; 
+        document.getElementById('site_name').textContent = siteName; 
+
         fetch('/get_ratings/' + siteId + '/')
             .then(response => response.json())
             .then(data => {

@@ -16,7 +16,6 @@ class Site(models.Model):
         total = sum(rating.value for rating in ratings)
         self.average_rating = total / len(ratings)
         self.save()
-
 class Rating(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     value = models.IntegerField()
