@@ -5,64 +5,44 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var marker1 = L.marker([37.262,-108.4855556]).addTo(map);
-marker1.bindPopup("<b>Mesa Verde National Park</b>").openPopup();
-marker1.on('click', function() {
-    document.getElementById('info').innerHTML = 'Located in the bottom right of Colorado, Mesa Verde National Park is a U.S. National Park and UNESCO World Heritage Site. The park protects some of the best-preserved Ancestral Puebloan archaeological sites in the United States. The park was created by President Theodore Roosevelt in 1906. It occupies 52,485 acres near the Four Corners region of the American Southwest. With more than 5,000 sites, including 600 cliff dwellings, it is the largest archaeological preserve in the U.S. The park is located in Montezuma County, Colorado, near the town of Cortez, in the Southwestern part of the state, about 40 miles west of Durango. The park features numerous ruins of homes and villages built by the Ancestral Puebloans. The Ancestral Puebloans made stone villages their home in the 1200s. The park is filled with canyons, mesas, and mountains, and is located at the edge of the San Juan National Forest. The park is named for the Spanish word for "green table," referring to the mesas that make up the park';
-});
+var sites = [
+    {id: 42, name: 'Mesa Verde National Park', coords: [37.262,-108.4855556]},
+    {id: 43, name: 'Yellowstone National Park', coords: [44.46056, -110.82778]},
+    //FIXME: Add the rest of the sites.
+];
 
-var marker2 = L.marker([44.46056, -110.82778]).addTo(map);
-marker2.bindPopup("<b>Yellowstone National Park</b>").openPopup();
-marker2.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Yellowstone National Park';
-});
+sites.forEach(function(site) {
+    let marker = L.marker(site.coords).addTo(map);
+    marker.id = site.id;
+    marker.on('click', function() {
+        let markerId = this.id; 
+        $.ajax({
+            url: '/get_site_data/' + markerId + '/',
+            dataType: 'json',
+            success: function(data) {
+                var popupContent = '<h2>' + data.name + '</h2>' +
+                                   '<p>Average rating: ' + data.average_rating.toFixed(2) + '</p>';
 
-var marker3 = L.marker([36.10083333, -112.0905556]).addTo(map);
-marker3.bindPopup("<b>Grand Canyon National Park</b>").openPopup();
-marker3.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Grand Canyon National Park';
-});
+                marker.bindPopup(popupContent).openPopup();
 
-var marker4 = L.marker([25.55444444, -80.99638889]).addTo(map);
-marker4.bindPopup("<b>Everglades National Park</b>").openPopup();
-marker4.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Everglades National Park';
-});
+                document.getElementById('siteName').textContent = data.name;
 
-var marker5 = L.marker([39.9489,-75.1500]).addTo(map);
-marker5.bindPopup("<b>Independence Hall</b>").openPopup();
-marker5.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Independence Hall';
-});
+                var description = 'This is a short description of ' + data.name + '.';
+                document.getElementById('extraSiteInfo').textContent = description;
 
-var marker6 = L.marker([41.37388889,-123.9980556]).addTo(map);
-marker6.bindPopup("<b>Redwood National and State Parks</b>").openPopup();
-marker6.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Redwood National and State Parks';
-});
+                document.getElementById('averageRating').textContent = 'Average rating: ' + data.average_rating;
 
-var marker7 = L.marker([37.18722222,-86.10305556]).addTo(map);
-marker7.bindPopup("<b>Mammoth Cave National Park</b>").openPopup();
-marker7.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Mammoth Cave National Park';
-});
+                document.getElementById('ratingForm').action = '/submit_rating/' + markerId + '/';  
+                document.getElementById('siteId').value = markerId; 
 
-var marker8 = L.marker([47.74833333,-123.4488889]).addTo(map);
-marker8.bindPopup("<b>Olympic National Park</b>").openPopup();
-marker8.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Olympic National Park';
-});
-
-var marker9 = L.marker([40.689247,-74.044502]).addTo(map);
-marker9.bindPopup("<b>The Statue of Liberty</b>").openPopup();
-marker9.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about The Statue of Liberty';
-});
-
-var marker10 = L.marker([38.030121, -78.476655]).addTo(map);
-marker10.bindPopup("<b>Monticello and the University of Virginia in Charlottesville</b>").openPopup();
-marker10.on('click', function() {
-    document.getElementById('info').innerHTML = 'Additional information about Monticello and the University of Virginia in Charlottesville';
+                var directionsLink = document.getElementById('directionsLink');
+                directionsLink.href = 'https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=' + site.coords[0] + ',' + site.coords[1];
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+            }
+        });
+    });
 });
 
 $(document).ready(function() {
@@ -72,12 +52,11 @@ $(document).ready(function() {
         var rating = $("#" + formId + " input[name='rating']").val();
         var siteId = $("#" + formId + " input[name='site_id']").val();
         $.ajax({
-            url: '/rate_site/',  // replace with your actual rate_site URL
-            type: "POST",
+            url: '/map_view/',
+            type: 'POST',
             data: {
-                'site_id': siteId,
                 'rating': rating,
-                'csrfmiddlewaretoken': $.cookie('csrftoken')  // get CSRF token from cookie
+                'csrfmiddlewaretoken': $.cookie('csrftoken') 
             },
             dataType: 'json',
             success: function (data) {
@@ -88,3 +67,42 @@ $(document).ready(function() {
         });
     });
 });
+
+document.querySelectorAll('.site').forEach(function(site) {
+    site.addEventListener('click', function() {
+        var siteId = this.dataset.siteId;
+        var siteName = sites.find(s => s.id === parseInt(siteId)).name; 
+        document.getElementById('site_name').textContent = siteName; 
+
+        fetch('/get_ratings/' + siteId + '/')
+            .then(response => response.json())
+            .then(data => {
+                var ratingsElement = document.getElementById('ratings');
+                ratingsElement.innerHTML = '';
+                data.ratings.forEach(function(rating) {
+                    var ratingElement = document.createElement('p');
+                    ratingElement.textContent = 'Rating: ' + rating.value;
+                    ratingsElement.appendChild(ratingElement);
+                });
+                var averageRatingElement = document.getElementById('average_rating');
+                averageRatingElement.textContent = 'Average rating: ' + data.average_rating;
+            });
+    });
+});
+
+var csrftoken = getCookie('csrftoken');
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

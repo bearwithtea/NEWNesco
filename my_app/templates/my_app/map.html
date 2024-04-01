@@ -27,9 +27,9 @@
     <div id="map">
     </div>
   </section>
-  <section id = "extrainfo">
+  <section id = "siteDescription">
     <div id="info">
-      <p id = "siteDescription"></p>
+      <p id = "extraSiteInfo"></p>
     </div>
   </section>
   <section id = "yourrating">
@@ -44,6 +44,9 @@
       </form>
     </div>
   </section>
+  <section>
+    <a id = "directionsLink" href = "https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=Destination+Coordinates" target="_blank"> <img src="{% static 'my_app/car.png' %}"> Get Directions</a>
+  </section>  
     <script src="{% static 'my_app/map.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

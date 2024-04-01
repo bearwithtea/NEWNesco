@@ -1,6 +1,6 @@
 #Django Imports
 from django.db import models
-
+from django.contrib.auth.models import User
 class Site(models.Model):
     name = models.CharField(max_length=200)
     average_rating = models.FloatField(default=0)
@@ -21,3 +21,8 @@ class Site(models.Model):
 class Rating(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     value = models.IntegerField()
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)

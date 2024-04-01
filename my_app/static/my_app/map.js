@@ -20,17 +20,23 @@ sites.forEach(function(site) {
             url: '/get_site_data/' + markerId + '/',
             dataType: 'json',
             success: function(data) {
-
                 var popupContent = '<h2>' + data.name + '</h2>' +
                                    '<p>Average rating: ' + data.average_rating.toFixed(2) + '</p>';
 
                 marker.bindPopup(popupContent).openPopup();
 
                 document.getElementById('siteName').textContent = data.name;
+
+                var description = 'This is a short description of ' + data.name + '.';
+                document.getElementById('extraSiteInfo').textContent = description;
+
                 document.getElementById('averageRating').textContent = 'Average rating: ' + data.average_rating;
 
                 document.getElementById('ratingForm').action = '/submit_rating/' + markerId + '/';  
                 document.getElementById('siteId').value = markerId; 
+
+                var directionsLink = document.getElementById('directionsLink');
+                directionsLink.href = 'https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=' + site.coords[0] + ',' + site.coords[1];
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);
@@ -46,10 +52,9 @@ $(document).ready(function() {
         var rating = $("#" + formId + " input[name='rating']").val();
         var siteId = $("#" + formId + " input[name='site_id']").val();
         $.ajax({
-            url: '/rate_site/', 
-            type: "POST",
+            url: '/map_view/',
+            type: 'POST',
             data: {
-                'site_id': siteId,
                 'rating': rating,
                 'csrfmiddlewaretoken': $.cookie('csrftoken') 
             },
@@ -84,3 +89,20 @@ document.querySelectorAll('.site').forEach(function(site) {
             });
     });
 });
+
+var csrftoken = getCookie('csrftoken');
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

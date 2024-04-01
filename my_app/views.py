@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django import forms
 from django.db.models import Avg
 from django.contrib.auth.forms import AuthenticationForm
+from .models import Comment
 
 # Local imports
 from .models import Site, Rating
