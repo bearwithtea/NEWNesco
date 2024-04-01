@@ -1,23 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{%block content%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/CSS/homestyles.css">
-    <title>NEWNesco Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'my_app/homestyles.css' %}">
+    <title>NEWNesco</title>
 </head>
 <body>  
-    <div id = "welcome-message">
-        <h1>Welcome to NEWNesco</h1>
-        <h3>Please Log-In</h3>
-    </div>
-    <form method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <button type="submit">Log in</button>
-    </form>
+    <section id = "NEWNescoText">
+        <h1 id = Welcome> <u> Welcome </u> </h1>
+        <h3 id = to> to </h3>
+        <h1 id = NEWNesco> <u> NEWNesco </u> </h1>
+        <p id = NEWNescoDescription> Your guide to discovering the world's greatest heritage sites </p>
+        <p id = Enter> <a href="{% url 'login' %}">Enter &rarr;</a></p>
+    </section>
 </body>
+    <section id = "Photos">
+        <a id="Villa"><img class="villa-image" src="{% static 'my_app/Villa.avif' %}" alt="Villa"></a>   
+        <a id="Piza"><img class="piza-image" src="{% static 'my_app/piza.avif' %}" alt="Piza"></a>
+        <a id = "Mountains"><img class="mountain-image" src = "{% static 'my_app/mountains.avif' %}" alt = "Mountain"></a>
+    </section>
 </html>
+{%endblock%}

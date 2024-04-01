@@ -1,0 +1,93 @@
+body {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    background-color: #F4E4BA;
+}
+
+#Welcome {
+    font-size: 96px;
+    font-weight: bold;
+    padding-top: 2%;
+    padding-left: 18%;
+}
+
+#to {
+    font-size: 48px;
+    font-weight: bold;
+    padding-top: 4%;
+    padding-left: 65%;
+}
+
+#NEWNesco {
+    font-size: 96px;
+    font-weight: bold;
+    padding-top: 2%;
+    padding-left: 30%;
+}
+
+#NEWNescoDescription {
+    font-size: 40px;
+    font-weight: 325;
+    padding-top: 1%;
+    padding-left: 45%;
+    width: 400px;
+}
+
+#Enter {
+    font-size: 24px;
+    color: black;
+    font-weight: bold;
+    padding-top: 2%;
+    padding-left: 93%;
+    animation: smoothBlink 1.5s linear infinite;
+}
+
+@keyframes smoothBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.villa-image {
+    position: absolute; 
+    margin-top: 10%;
+    margin-left: 73%;
+    top: 0; 
+    height: 400px;
+    width: 700px;
+    border-radius: 10px;
+    z-index: 1; 
+}
+
+.piza-image {
+    position: absolute; 
+    margin-top: 10%;
+    margin-left: 5%;
+    top: 0; 
+    height: 800px;
+    width: 500px;
+    border-radius: 10px;
+    z-index: -1; 
+}
+
+.mountain-image {
+    position: absolute; 
+    margin-top: 47%;
+    margin-left: 58%;
+    top: 0; 
+    height: 300px;
+    width: 500px;
+    border-radius: 10px;
+    z-index: -1; 
+}
