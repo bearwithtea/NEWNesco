@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django import forms
 from django.db.models import Avg
+from django.contrib.auth.forms import AuthenticationForm
 
 # Local imports
 from .models import Site, Rating
@@ -15,7 +16,7 @@ def home(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = authenticate(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
@@ -23,7 +24,7 @@ def login_view(request):
         else:
             return HttpResponse("Invalid username or password :(. Please give it another shot.")
     else:
-        form = authenticate()
+        form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
     
 def map_view(request):
