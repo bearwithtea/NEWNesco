@@ -1,0 +1,115 @@
+body {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    background-color:#F4E4BA;
+}
+
+#welcometext {
+    width: 500px;
+    padding-left: 475px;
+    padding-top: 20%;
+    font-size: 35px;
+    font-weight: bold;
+    color: black;
+}
+
+.login-text {
+    margin-top: 25px;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: rgba(255, 255, 255, 0);
+    width: 23% !important;
+    color: black;
+    padding: 12px 20px;
+    margin-left: 390px !important;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#Enter {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    font-size: 24px; 
+    font-weight: bold;
+    padding-top: 16%;
+    padding-left: 92%;    
+    background: transparent;
+    border: none;
+    animation: smoothBlink 1.5s linear infinite;
+}
+
+#Register {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    font-size: 24px; 
+    font-weight: bold;
+    margin-top: -1%; 
+    margin-left: 1%;
+    background: transparent;
+    border: none;
+    z-index: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form input[type="text"], form input[type="password"] {
+    width: 90%;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.mountain2-image, .Italy-image, .water-cliffs-image{
+    animation: fadeIn 1s ease-in-out 1;
+    animation-fill-mode: forwards;
+}
+
+.mountain2-image {
+    position: absolute; 
+    margin-top: -10%;
+    margin-left: 60%;
+    top: 0; 
+    width: 600px;
+    height: 700px;
+    border-radius: 10px;
+    z-index: -1; 
+}
+
+.Italy-image {
+    position: absolute; 
+    margin-top: 8%;
+    margin-left: 2%;
+    top: 0; 
+    height: 800px;
+    width: 500px;
+    border-radius: 10px;
+    z-index: -1; 
+}

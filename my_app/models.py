@@ -21,7 +21,7 @@ class Site(models.Model):
 class Rating(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     value = models.IntegerField()
-class Comment(models.Model):
+class Comment(models.Model): #do not touch this, the code breaks whenever I delete this.
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     text = models.TextField()

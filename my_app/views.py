@@ -2,6 +2,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django import forms
@@ -27,7 +29,22 @@ def login_view(request):
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
-    
+     
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
+
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = User.objects.create_user(username=username, password=password)
+        login(request, user)
+        return redirect('map')
+    else:
+        return render(request, 'register.html')
+
+@login_required     
 def map_view(request):
     sites = Site.objects.all()
     if not sites:

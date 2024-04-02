@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block head %}
+  <title>Register</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'my_app/register.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div id = "welcometext">
+  <h1> <u> Register for NEWNesco </u></h1>
+  </div>
+  <div class = "login-text">
+  </div>
+  <form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit" id="Enter">Register &rarr;</button> <!-- FIXME: throw proper arrow for when the user does not enter a username or password-->
+  </form>
+  <section id = "Photos">
+    <a id="Mountain2"><img class="mountain2-image" src="{% static 'my_app/mountain.jpg' %}" alt="Mountain"></a>   
+    <a id="Italy"><img class="Italy-image" src="{% static 'my_app/italy.jpg' %}" alt="Italy"></a>
+  </section>
+{% endblock %}

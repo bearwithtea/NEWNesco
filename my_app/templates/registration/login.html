@@ -8,24 +8,21 @@
 {% endblock %}
 
 {% block content %}
-  <div id="video-background">
-    <video autoplay muted loop id="video-background">
-      <source src="{% static 'my_app/loginbackgroundfootage.mp4' %}" type="video/mp4">
-  </video>
-  </div>
   <div id = "welcometext">
-  <h1>Welcome to NEWNesco</h1>
+  <h1> <u> Enter NEWNesco </u></h1>
   </div>
-  <div id = "welcometext2">
-  <h2> A simpler way to learn about UNESCO sites</h2>
+  <div class = "login-text">
   </div>
-  <div id = "logintext">
-    <h2>Login</h2>
-  </div>
-  <form method="post">
+<form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
-    <button type="submit">Login</button>
-  </form>
+    <button type="submit" id = "Enter">Enter &rarr;</button> <!-- for some fucking reason clicking anything below the password enter box just errors the page. fix.-->
+</form>
+<p id="Register" id = "Register"> <a href="{% url 'register' %}"> &larr; Register</a></p>
+<section id = "Photos">
+  <a id="Petra"><img class="petra-image" src="{% static 'my_app/petra.avif' %}" alt="Villa"></a>   
+  <a id="Arch"><img class="arch-image" src="{% static 'my_app/arch.avif' %}" alt="Piza"></a>
+  <a id = "WaterCliffs"><img class="water-cliffs-image" src = "{% static 'my_app/watercliffs.jpg' %}" alt = "Cliffs in the Water"></a>
+</section>
 {% endblock %}

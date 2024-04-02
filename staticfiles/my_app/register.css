@@ -1,0 +1,81 @@
+body {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    background-color:#F4E4BA;
+}
+
+#welcometext {
+    width: 500px;
+    padding-left: 300px;
+    padding-top: 20%;
+    font-size: 35px;
+    font-weight: bold;
+    color: black;
+}
+
+.login-text {
+    margin-top: -190px;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: rgba(255, 255, 255, 0);
+    width: 30% !important;
+    color: black;
+    padding: 12px 20px;
+    margin-left: 500px !important;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#Enter {
+    font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+    font-size: 24px; 
+    font-weight: bold;
+    padding-top: 25%;
+    padding-left: 93%;    
+    background: transparent;
+    border: none;
+    animation: smoothBlink 1.5s linear infinite;
+}
+
+@keyframes smoothBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form input[type="text"], form input[type="password"] {
+    width: 90%;
+}

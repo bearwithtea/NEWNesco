@@ -59,6 +59,17 @@ a:visited {
     text-decoration: none;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.villa-image, .piza-image, .mountain-image {
+    animation: fadeIn 1s ease-in-out 1;
+    animation-fill-mode: forwards;
+}
+
+
 .villa-image {
     position: absolute; 
     margin-top: 10%;
