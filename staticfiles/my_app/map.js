@@ -30,7 +30,7 @@ sites.forEach(function(site) {
                 var description = 'This is a short description of ' + data.name + '.';
                 document.getElementById('extraSiteInfo').textContent = description;
 
-                document.getElementById('averageRating').textContent = 'Average rating: ' + data.average_rating;
+                document.getElementById('averageRating').textContent = 'Average rating: ' + data.average_rating.toFixed(2);
 
                 document.getElementById('ratingForm').action = '/submit_rating/' + markerId + '/';  
                 document.getElementById('siteId').value = markerId; 

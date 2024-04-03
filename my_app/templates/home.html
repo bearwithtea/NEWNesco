@@ -15,15 +15,19 @@
     <section id = "NEWNescoText">
         <h1 id = Welcome> <u> Welcome </u> </h1>
         <h3 id = to> to </h3>
-        <h1 id = NEWNesco> <u> NEWNesco </u> </h1>
+        <h1 id = NEWNesco> <u> NEWNesco </u> 
+            <span class = "tooltip"> UNESCO is an organization dedicated to honoring and providing visibility to some of the world's most incredible sites. NEWNesco seeks to provide an easier way to learn about and get to these sites.</span>
+        </h1>
         <p id = NEWNescoDescription> Your guide to discovering the world's greatest heritage sites </p>
         <p id = Enter> <a href="{% url 'login' %}">Enter &rarr;</a></p>
+        <input type= "text" id = "hiddenDescription">
     </section>
     <section id = "Photos">
         <a id="Villa"><img class="villa-image" src="{% static 'my_app/Villa.avif' %}" alt="Villa"></a>   
         <a id="Piza"><img class="piza-image" src="{% static 'my_app/piza.avif' %}" alt="Piza"></a>
         <a id = "Mountains"><img class="mountain-image" src = "{% static 'my_app/mountains.avif' %}" alt = "Mountain"></a>
     </section>
+    <script src="{% static 'my_app/home.js' %}"></script>
 </body>
 </html>
 {%endblock%}

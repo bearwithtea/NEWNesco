@@ -1,10 +1,6 @@
 body {
     font-family: 'SF Pro Text',-apple-system,BlinkMacSystemFont,Roboto,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
-    background: #4e9525; /* fallback for old browsers */
-    background: -webkit-linear-gradient(-45deg, #4e9525, #006837); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(-45deg, #4e9525, #006837); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size: 200% 200%;
-    animation: Gradient 2s ease infinite;
+    background-color:#F4E4BA;
 }
 
 @keyframes Gradient {
@@ -20,7 +16,7 @@ body {
     padding-top: 1%;
     font-size: 35px;
     font-weight: bold;
-    color: #ffffff;
+    color: #000000;
 }
 
 #map {
@@ -84,7 +80,24 @@ body {
     border-radius: 10%;
 }
 
-#directions {
-    padding-top: 30%;
-    padding-left: 60%;
+#directionsLink img {
+    padding-left: 70%;
+    padding-top: 40%;
+    height: 225px;
+    width: 300px;
+    font-weight: 800;
+}
+
+#directionsLink span {
+    padding-left: 76%;
+    font-weight: 800;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
 }
