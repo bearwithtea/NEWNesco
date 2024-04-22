@@ -8,7 +8,27 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var sites = [
     {id: 42, name: 'Mesa Verde National Park', coords: [37.262,-108.4855556]},
     {id: 43, name: 'Yellowstone National Park', coords: [44.46056, -110.82778]},
-    //FIXME: Add the rest of the sites.
+    {id : 44, name: 'Grand Canyon National Park', coords: [36.10083333, -112.0905556]},
+    {id: 45, name: 'Everglades National Park', coords: [25.55444444, -80.99638889]},
+    {id: 46, name: 'Redwood National and State Park', coords: [41.37388889, -123.9980556]},
+    {id: 47, name: 'Independence Hall', coords: [39.94861111, -75.15]},
+    {id: 48, name: 'Mammoth Cave National Park', coords: [37.18722222, -86.10305556]},
+    {id: 49, name: 'Olympic National Park', coords: [47.74833333, -123.4488889]},
+    {id: 50, name: 'Cahokia Mounds State Historic Site', coords: [38.65861111, -90.06138889]},
+    {id: 51, name: 'Great Smoky Mountains National Park', coords: [35.59305556, -83.43555556]},
+    {id: 52, name: 'La Fortaleza and San Juan National Historic Site in Puerto Rico', coords: [18.46666667, -66.125]},
+    {id: 53, name: 'Statue of Liberty', coords: [40.68944444, -74.04472222]},
+    {id: 54, name: 'Yosemite National Park', coords: [37.74611111, -119.5966667]},
+    {id: 55, name: 'Chaco Culture', coords: [36.06377778, -107.9708333]},
+    {id: 56, name: 'Hawaii Volcanoes National Park', coords: [19.40083333, -155.1236111]},
+    {id: 57, name: 'Monticello and the University of Virginia in Charlottesville', coords: [38.03277778, -78.50388889]},
+    {id: 58, name: 'Taos Pueblo', coords: [36.438, -105.546]},
+    {id: 59, name: 'Carlsbad Caverns National Park', coords: [32.16666667, -104.3833333]},
+    {id: 60, name: 'Papahānaumokuākea', coords: [25.34907, -170.14582]},
+    {id: 61, name: 'Monumental Earthworks of Poverty Point', coords: [32.63694444, -91.40638889]},
+    {id: 62, name: 'San Antonio Missions', coords: [29.32805556, -98.46]},
+    {id: 63, name: 'The 20th-Century Architecture of Frank Lloyd Wright', coords: [39.90557083, -79.46647556]},
+    {id: 64, name: 'Hopewell Ceremonial Earthworks', coords: [40.05365833, -82.44606111]},
 ];
 
 sites.forEach(function(site) {

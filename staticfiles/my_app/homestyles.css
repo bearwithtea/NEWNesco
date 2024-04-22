@@ -22,21 +22,47 @@ body {
     font-weight: bold;
     padding-top: 2%;
     padding-left: 30%;
+    position: relative;
+    display: inline-block;
 }
+  
+    .tooltip {
+    visibility: hidden;
+    width: 500px;
+    font-size: large;
+    font-weight: normal;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+    }
+  
+  #NEWNesco:hover .tooltip {
+    visibility: visible;
+    opacity: 0.7;
+  }
 
 #NEWNescoDescription {
     font-size: 40px;
     font-weight: 325;
-    padding-top: 1%;
-    padding-left: 45%;
-    width: 400px;
+    padding-left: 40%;
+    width: 398px;
 }
 
 #Enter {
     font-size: 24px;
     color: black;
+    margin-top: -70px;
     font-weight: bold;
-    padding-top: 2%;
     padding-left: 93%;
     animation: smoothBlink 1.5s linear infinite;
 }
@@ -101,4 +127,8 @@ a:visited {
     width: 500px;
     border-radius: 10px;
     z-index: -1; 
+}
+
+#hiddenDescription {
+    display: none;
 }
