@@ -34,15 +34,27 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+
+        if User.objects.filter(username=username).exists():
+            # A user with this username already exists
+            return render(request, 'register.html', {
+                'error': 'A user with this username already exists.'
+            })
+
+        # Create the new user
         user = User.objects.create_user(username=username, password=password)
         login(request, user)
         return redirect('map')
-    else:
-        return render(request, 'register.html')
+
+    return render(request, 'register.html'))
 
 @login_required     
 def map_view(request):
@@ -104,8 +116,14 @@ def get_site_data(request, site_id):
 
 class RatingForm(forms.Form): 
     site_id = forms.IntegerField(widget=forms.HiddenInput())
-    rating = forms.IntegerField(min_value=1, max_value=5)
-    # FIXME: throw an error when a user enters nothing
+    rating = forms.IntegerField(
+        min_value=1, 
+        max_value=5, 
+        error_messages={
+            'required': 'Please enter a rating between 1 and 5.',
+            'invalid': 'Please enter a valid integer.',
+        }
+    )
 
 from django.http import JsonResponse
 from .models import Site

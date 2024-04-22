@@ -1,5 +1,6 @@
 
 from django.urls import path 
+from django.contrib import admin
 from django.contrib.auth import views as auth_views 
 from . import views 
 from .views import map_view 
@@ -7,6 +8,7 @@ from .views import get_all_site_ids
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('admin/', admin.site.urls),
     path('map/', views.map_view, name='map'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
