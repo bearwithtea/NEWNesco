@@ -5,10 +5,11 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+//FIXME: Cannot properly pass the coordinates into the Google Maps API.
 var sites = [
     {id: 42, name: 'Mesa Verde National Park', coords: [37.262,-108.4855556]},
     {id: 43, name: 'Yellowstone National Park', coords: [44.46056, -110.82778]},
-    {id : 44, name: 'Grand Canyon National Park', coords: [36.10083333, -112.0905556]},
+    {id: 44, name: 'Grand Canyon National Park', coords: [36.10083333, -112.0905556]},
     {id: 45, name: 'Everglades National Park', coords: [25.55444444, -80.99638889]},
     {id: 46, name: 'Redwood National and State Park', coords: [41.37388889, -123.9980556]},
     {id: 47, name: 'Independence Hall', coords: [39.94861111, -75.15]},
@@ -32,7 +33,7 @@ var sites = [
 ];
 
 sites.forEach(function(site) {
-    let marker = L.marker(site.coords).addTo(map);
+    let marker = L.marker(site.coords).addTo(map).bindPopup('<h2>' + site.name + '</h2>');
     marker.id = site.id;
     marker.on('click', function() {
         let markerId = this.id; 
@@ -43,7 +44,7 @@ sites.forEach(function(site) {
                 var popupContent = '<h2>' + data.name + '</h2>' +
                                    '<p>Average rating: ' + data.average_rating.toFixed(2) + '</p>';
 
-                marker.bindPopup(popupContent).openPopup();
+                marker.setPopupContent(popupContent).openPopup();
 
                 document.getElementById('siteName').textContent = data.name;
 
@@ -56,7 +57,8 @@ sites.forEach(function(site) {
                 document.getElementById('siteId').value = markerId; 
 
                 var directionsLink = document.getElementById('directionsLink');
-                directionsLink.href = 'https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=' + site.coords[0] + ',' + site.coords[1];
+                directionsLink.href = 'https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=' + site.coords[0].toFixed(6) + ',' + site.coords[1].toFixed(6);
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);

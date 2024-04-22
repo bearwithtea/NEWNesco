@@ -34,27 +34,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 
-from django.contrib.auth import login
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
-        if User.objects.filter(username=username).exists():
-            # A user with this username already exists
-            return render(request, 'register.html', {
-                'error': 'A user with this username already exists.'
-            })
-
-        # Create the new user
         user = User.objects.create_user(username=username, password=password)
         login(request, user)
         return redirect('map')
-
-    return render(request, 'register.html'))
+    else:
+        return render(request, 'register.html')
 
 @login_required     
 def map_view(request):
@@ -110,7 +98,7 @@ def get_site_data(request, site_id):
     data = {
         'id': site.id,
         'name': site.name,
-        'average_rating': site.average_rating,  # Make sure this attribute exists
+        'average_rating': site.average_rating,
     }
     return JsonResponse(data)
 
