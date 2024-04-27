@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 class Site(models.Model):
+    #site_id = models.AutoField(min_value = 1)
     name = models.CharField(max_length=200)
     average_rating = models.FloatField(default=0)
 
@@ -14,9 +15,10 @@ class Site(models.Model):
 
     def update_average_rating(self):
         ratings = self.rating_set.all()
-        total = sum(rating.value for rating in ratings)
-        self.average_rating = total / len(ratings)
-        self.save()
+        if ratings.count() > 0:
+            total = sum(rating.value for rating in ratings)
+            self.average_rating = total / len(ratings)
+            self.save()
 
 class Rating(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
