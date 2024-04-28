@@ -17,7 +17,7 @@
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
-    <button type="submit" id = "Enter">Enter &rarr;</button> <!-- for some fucking reason clicking anything below the password enter box just errors the page. fix.-->
+    <button type="submit" id = "Enter">Enter &rarr;</button> <!-- FIXME: for some fucking reason clicking anything below the password enter box just errors the page.-->
 </form>
 <p id="Register" id = "Register"> <a href="{% url 'register' %}"> &larr; Register</a></p>
 <section id = "Photos">
