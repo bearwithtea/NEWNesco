@@ -15,7 +15,7 @@ from .models import Comment
 from .models import Site, Rating
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'my_app/home.html')
 
 def login_view(request):
     if request.method == 'POST':
