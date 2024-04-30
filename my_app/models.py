@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 class Site(models.Model):
-    #site_id = models.AutoField(min_value = 1)
+    #site_id = models.AutoField(min_value = 1) DO NOT TOUCH THIS.
     name = models.CharField(max_length=200)
     average_rating = models.FloatField(default=0)
 
