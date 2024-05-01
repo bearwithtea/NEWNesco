@@ -5,24 +5,44 @@
 {% block head %}
   <title>Login</title>
   <link rel="stylesheet" type="text/css" href="{% static 'my_app/login.css' %}">
+  <style>
+.error {
+      position: absolute;
+      top: 75%;
+      left: 50%; /* Position right  */
+      margin-left: 10px; /* Space between it*/
+      color: red;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
-  <div id = "welcometext">
-  <h1> <u> Enter NEWNesco </u></h1>
+  <div id="welcometext">
+    <h1><u>Enter NEWNesco</u></h1>
   </div>
-  <div class = "login-text">
-  </div>
-<form method="post" action="{% url 'login' %}">
+
+  <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
-    <button type="submit" id = "Enter">Enter &rarr;</button> <!-- FIXME: for some fucking reason clicking anything below the password enter box just errors the page.-->
-</form>
-<p id="Register" id = "Register"> <a href="{% url 'register' %}"> &larr; Register</a></p>
-<section id = "Photos">
-  <a id="Petra"><img class="petra-image" src="{% static 'my_app/petra.png' %}" alt="Villa"></a>   
-  <a id="Arch"><img class="arch-image" src="{% static 'my_app/wall.png' %}" alt="Piza"></a>
-  <a id = "WaterCliffs"><img class="water-cliffs-image" src = "{% static 'my_app/watercliffs.jpg' %}" alt = "Cliffs in the Water"></a>
-</section>
+
+    {% if messages %}
+      {% for message in messages %}
+        <!-- Display error message -->
+        <div id="class" class="error">  {{message }}</div>
+
+
+      {% endfor %}
+    {% endif %}
+    <br> <!-- line break for the part between it  -->
+    <button type="submit" id="Enter">Enter &rarr;</button>
+  </form>
+
+  <p id="Register"><a href="{% url 'register' %}">&larr; Register</a></p>
+
+  <section id="Photos">
+    <a id="Petra"><img class="petra-image" src="{% static 'my_app/petra.avif' %}" alt="Villa"></a>
+    <a id="Arch"><img class="arch-image" src="{% static 'my_app/arch.avif' %}" alt="Piza"></a>
+    <a id="WaterCliffs"><img class="water-cliffs-image" src="{% static 'my_app/watercliffs.jpg' %}" alt="Cliffs in the Water"></a>
+  </section>
 {% endblock %}
